@@ -1,6 +1,10 @@
+
+
+//funcoes validacao
 let B7Validator = {
     handleSubmit:(event)=>{
         event.preventDefault();
+        //envie por padrao
         let send = true;
 
         let inputs = form.querySelectorAll('input');
@@ -8,9 +12,12 @@ let B7Validator = {
         B7Validator.clearErrors();
 
         for(let i=0;i<inputs.length;i++) {
+            //cada input
             let input = inputs[i];
+            //checagem input
             let check = B7Validator.checkInput(input);
-            if(check !== true) {
+            if(check) {
+                //nao envie
                 send = false;
                 B7Validator.showError(input, check);
             }
@@ -23,7 +30,9 @@ let B7Validator = {
     checkInput:(input) => {
         let rules = input.getAttribute('data-rules');
 
+        //se o campo tem regras...
         if(rules !== null) {
+            //separa as regras numa array
             rules = rules.split('|');
             for(let k in rules) {
                 let rDetails = rules[k].split('=');
@@ -50,6 +59,7 @@ let B7Validator = {
             }
         }
 
+        //se o campo nao tem regras, retorne true diretamente
         return true;
     },
     showError:(input, error) => {
@@ -74,5 +84,6 @@ let B7Validator = {
     }
 };
 
+//quando formulario for submit...
 let form = document.querySelector('.b7validator');
 form.addEventListener('submit', B7Validator.handleSubmit);
