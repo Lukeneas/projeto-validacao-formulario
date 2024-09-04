@@ -1,3 +1,7 @@
+
+//OBS : se o usuario desativar o JS, a validacao nao funciona
+//Valid 1 : Front, Valid 2 : Back
+
 //funcoes validacao
 let B7Validator = {
   handleSubmit: (event) => {
@@ -56,9 +60,12 @@ let B7Validator = {
             break;
           //padrao email
           case "email":
+            //se não está vazio...
             if (input.value != "") {
+                //padrao regex
               let regex =
                 /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                //se teste errado regex...
               if (!regex.test(input.value.toLowerCase())) {
                 return "E-mail digitado não é válido!";
               }
@@ -102,3 +109,4 @@ let B7Validator = {
 //quando formulario for submit...
 let form = document.querySelector(".b7validator");
 form.addEventListener("submit", B7Validator.handleSubmit);
+
